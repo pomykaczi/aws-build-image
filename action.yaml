@@ -40,6 +40,7 @@ runs:
         IMAGE_TAG: ${{ github.sha }}
         ECR_REPOSITORY: ${{ inputs.repository }}
         AWS_REGION: ${{ inputs.aws-region }}
+      shell: bash
       run: |
         aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
         docker build . -f Dockerfile -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
